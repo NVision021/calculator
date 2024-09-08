@@ -15,18 +15,29 @@ const divide = function(num1, num2) {
   return num1 / num2;
 }
 
+
+//Function that converts too long numbers to exponentials and rounds too short
+const fitNum = function(num) {
+  if (num > 1 && num.toString().length > 12) {
+    num = num.toExponential(6);
+  } else if (num.toString().length > 12) {
+    num = num.toFixed(12);
+  }
+  return num;
+}
+
 //Function to determine which operator function to use
 const operate = function(num1, operator, num2) {
   num1 = Number(num1);
   num2 = Number(num2);
   if (operator === "+") {
-    screen.textContent = add(num1, num2);
+    screen.textContent = fitNum(add(num1, num2));
   } else if (operator === "-") {
-    screen.textContent = subtract(num1, num2);
+    screen.textContent = fitNum(subtract(num1, num2));
   } else if (operator === "*") {
-    screen.textContent = multiply(num1, num2);
+    screen.textContent = fitNum(multiply(num1, num2))
   } else if (operator === "/") {
-    screen.textContent = divide(num1, num2);
+    screen.textContent = fitNum(divide(num1, num2))
   }
 }
 
@@ -43,14 +54,12 @@ const numberButtons = document.querySelectorAll(".button.number");
 numberButtons.forEach(button => {
   button.addEventListener("click", e => {
     //check if the operator has been filled to determine whether it goes to 1 or 2
-    if (operator === "" && number1.length < 9) {
+    if (operator === "" && number1.length < 12) {
       equalButton.classList.remove("selected");
       number1 += e.target.textContent;
-      console.log(number1);
       screen.textContent = number1;
-    } else if (operator !== "" && number2.length < 9) {
+    } else if (operator !== "" && number2.length < 12) {
       number2 += e.target.textContent;
-      console.log(number2);
       screen.textContent = number2;
     }
   });
@@ -66,13 +75,11 @@ operatorButtons.forEach(button => {
       e.target.classList.add("selected");
       if (number2 === "") {
         operator = e.target.textContent;
-        console.log(operator);
       } else {
         operate (number1, operator, number2)
         number1 = screen.textContent;
         number2 = "";
         operator = e.target.textContent;
-        console.log(operator);
       }
     }
   })
@@ -94,4 +101,12 @@ equalButton.addEventListener("click", e => {
     operator = "";
   }
 })
+
+//Need to:
+  //round small numbers to a decimal point limit (this is kind of already done automatically)
+  // round huge numbers to scientific notation, ?to exponential vs toPrecision
+  //add snarky /0 response
+  //activate the clear button
+  // activate delete, decimal buttons
+
 
