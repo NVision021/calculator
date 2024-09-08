@@ -43,7 +43,7 @@ h1 {
 }
 
 #screen-background {
-  flex: 1;
+  flex: 1.5 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,9 +63,22 @@ h1 {
   font-size: 35px;
 }
 
+#clear-background {
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  justify-content: left;
+  flex: 1;
+}
+
+.function.button {
+  max-width: 50%;
+  border-radius: 5%;
+}
+
 #buttons {
   display: flex;
-  flex: 3 1 0;
+  flex: 4 1 0;
   padding: 5px;
   padding-top: 0px;
   
@@ -98,7 +111,8 @@ h1 {
   background-color: gray;
 }
 
-.button.operator {
+.button.operator,
+.button.equal {
   background-color: rgb(255, 94, 0);
 }
 
