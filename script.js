@@ -17,6 +17,8 @@ const divide = function(num1, num2) {
 
 //Function to determine which operator function to use
 const operate = function(num1, operator, num2) {
+  num1 = Number(num1);
+  num2 = Number(num2);
   if (operator === "+") {
     return add(num1, num2);
   } else if (operator === "-") {
@@ -38,8 +40,8 @@ const screen = document.querySelector("#screen");
 
 //add event listeners to number buttons and display the appropriate one on screen
 const numberButtons = document.querySelectorAll(".button.number");
-numberButtons.forEach((button) => {
-  button.addEventListener("click", (e) => {
+numberButtons.forEach(button => {
+  button.addEventListener("click", e => {
     //check if the operator has been filled to determine whether it goes to 1 or 2
     if (operator === "" && number1.length < 9) {
       number1 += e.target.textContent;
@@ -53,8 +55,28 @@ numberButtons.forEach((button) => {
   });
 });
 
-// function that gets the operator
+// function that gets the operator when appropriate
+const operatorButtons = document.querySelectorAll(".operator.button");
+operatorButtons.forEach(button => {
+  button.addEventListener("click", e => {
+    if (number1 !== ""){
+      operatorButtons.forEach(button => button.classList.remove("selected"));
+      e.target.classList.add("selected");
+      if (number2 === "") {
+        operator = e.target.textContent;
+        console.log(operator);
+      } else {
+        result = operate (number1, operator, number2)
+        screen.textContent = result;
+        number1 = result;
+        number2 = "";
+        operator = e.target.textContent;
+        console.log(operator);
+      }
+    }
+  })
+})
 
-// function that gets the "=" input and runs the sum if all the required items are present
+// function that gets the "=" input and runs the sum if all the required items are present, then either save the final number if another operator is clicked or reset
 
 
