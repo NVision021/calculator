@@ -16,11 +16,16 @@ const divide = function(num1, num2) {
 }
 
 const fitNum = function(num) {
-  if (num % 1 && num.toString().length > 8) {
-    num = Number(num.toPrecision(8));
-  } 
-  if (num >= 100000000 || num.toString().length > 9 || num <= -100000000) {
+  //convert big numbers to scientific notation only
+  if (num >= 100000000 || num <= -100000000) {
     num = num.toExponential(6);
+    //cap decimal numbers to 8 numbers
+  } else if (num % 1 && num.toString().length > 9) {
+    num = Number(num.toPrecision(8));
+    //if the resulting number is a decimal with leading zeros, toPrecision will not reduce the length: scientific notation will instead be needed 
+    if (num.toString().length > 9) {
+      num = num.toExponential(6);
+    }
   }
   return num;
 }
