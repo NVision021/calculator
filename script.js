@@ -113,6 +113,7 @@ clearButton.addEventListener("click", () => {
   operator = "";
 })
 
+// event listener that backspaces the appropriate number on click
 const deleteButton = document.querySelector(".delete.button");
 deleteButton.addEventListener("click", () => {
   if (operator === "") {
@@ -125,7 +126,14 @@ deleteButton.addEventListener("click", () => {
 }
 )
 
-//Need to:
-  // decimal buttons
-
-
+// event listener that processes whether a decimal is present in each number and adds it if possible
+const decimalButton = document.querySelector(".decimal.button");
+decimalButton.addEventListener("click", () => {
+  if (operator === "" && number1.length < 12 && !number1.includes(".")) {
+    number1 += ".";
+    screen.textContent = number1;
+  } else if (operator !== "" && number2.length < 12 && !number2.includes(".")) {
+    number2 += ".";
+    screen.textContent = number2;
+  }
+})
