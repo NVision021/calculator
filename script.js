@@ -17,9 +17,9 @@ const divide = function(num1, num2) {
 
 const fitNum = function(num) {
   if (num % 1 && num.toString().length > 9) {
-    num = num.toPrecision(9);
+    num = Number(num.toPrecision(9));
   } 
-  if (num >= 100000000) {
+  if (num >= 100000000 || (num > 0 && num <= 0.00000001) || (num < 0 && num >= -0.00000001) || num <= -100000000) {
     num = num.toExponential(6);
   }
   return num;
