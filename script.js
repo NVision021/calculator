@@ -102,11 +102,18 @@ equalButton.addEventListener("click", e => {
   }
 })
 
+// event listener that deletes all data when the clear button is pressed
+const clearButton = document.querySelector(".clear.button");
+clearButton.addEventListener("click", () => {
+  operatorButtons.forEach(button => button.classList.remove("selected"));
+  equalButton.classList.remove("selected");
+  screen.textContent = "";
+  number1 = "";
+  number2 = "";
+  operator = "";
+})
+
 //Need to:
-  //round small numbers to a decimal point limit (this is kind of already done automatically)
-  // round huge numbers to scientific notation, ?to exponential vs toPrecision
-  //add snarky /0 response
-  //activate the clear button
-  // activate delete, decimal buttons
+  //activate delete, decimal buttons
 
 
