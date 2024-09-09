@@ -15,13 +15,12 @@ const divide = function(num1, num2) {
   return num1 / num2;
 }
 
-
-//Function that converts too long numbers to exponentials and rounds too short
 const fitNum = function(num) {
-  if (num > 1 && num.toString().length > 12) {
+  if (num % 1 && num.toString().length > 9) {
+    num = num.toPrecision(9);
+  } 
+  if (num >= 100000000) {
     num = num.toExponential(6);
-  } else if (num.toString().length > 12) {
-    num = num.toFixed(12);
   }
   return num;
 }
@@ -54,11 +53,11 @@ const numberButtons = document.querySelectorAll(".button.number");
 numberButtons.forEach(button => {
   button.addEventListener("click", e => {
     //check if the operator has been filled to determine whether it goes to 1 or 2
-    if (operator === "" && number1.length < 12) {
+    if (operator === "" && number1.length < 9) {
       equalButton.classList.remove("selected");
       number1 += e.target.textContent;
       screen.textContent = number1;
-    } else if (operator !== "" && number2.length < 12) {
+    } else if (operator !== "" && number2.length < 9) {
       number2 += e.target.textContent;
       screen.textContent = number2;
     }
@@ -129,10 +128,10 @@ deleteButton.addEventListener("click", () => {
 // event listener that processes whether a decimal is present in each number and adds it if possible
 const decimalButton = document.querySelector(".decimal.button");
 decimalButton.addEventListener("click", () => {
-  if (operator === "" && number1.length < 12 && !number1.includes(".")) {
+  if (operator === "" && number1.length < 9 && !number1.includes(".")) {
     number1 += ".";
     screen.textContent = number1;
-  } else if (operator !== "" && number2.length < 12 && !number2.includes(".")) {
+  } else if (operator !== "" && number2.length < 9 && !number2.includes(".")) {
     number2 += ".";
     screen.textContent = number2;
   }
