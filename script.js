@@ -76,7 +76,7 @@ operatorButtons.forEach(button => {
       if (number2 === "") {
         operator = e.target.textContent;
       } else {
-        operate (number1, operator, number2)
+        operate (number1, operator, number2);
         number1 = screen.textContent;
         number2 = "";
         operator = e.target.textContent;
@@ -113,7 +113,19 @@ clearButton.addEventListener("click", () => {
   operator = "";
 })
 
+const deleteButton = document.querySelector(".delete.button");
+deleteButton.addEventListener("click", () => {
+  if (operator === "") {
+    number1 = number1.slice(0, number1.length - 1);
+    screen.textContent = number1;
+  } else if (number2 !== "") {
+    number2 = number2.slice(0, number2.length - 1);
+    screen.textContent = number2;    
+  }
+}
+)
+
 //Need to:
-  //activate delete, decimal buttons
+  // decimal buttons
 
 
